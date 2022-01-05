@@ -1,0 +1,40 @@
+discord:
+  guildname: insert guild name
+  activity: insert bot activity
+  token: insert bot token here
+  #Channel and Role ID's
+  #(you can get id's by enabling developer mode in discord settings and right-clicking on an element and clicking on "opy id")
+  ids:
+    unverifiedroleid: 804262397044064257 #ID's look something like this
+    verifychannelid: 837263808556826645
+#Messages that will be shown(empty for no/empty message)
+messages:
+  minecraft: #use §-codes for colors
+    error:
+      syntax: "Syntaxerror:"
+      invalidplayername: "§cInvalid Player Name!"
+      invalidminecraftaccount: "§cInvalid Minecraft Account!"
+    verifyplayersuccess: "You sucessfully verified the Player"
+    unverifyplayersuccess: "You sucessfully unverified the Player"
+    triedtojoin: "tried to join the game"
+    notverified: "§aYou are not verified yet.\nJoin our Discordserver to verify: \n§bdiscord.mcsurvivalprojekt.de\n§6It just makes sure no bots are joining." #use \n for linebreaks
+
+  discord:
+    welcome: "Wilkommen auf "
+    welcomedescription: "Jetzt musst du nurnoch `/verify MinecraftNamen` eingeben."
+    nearlyverified: "You are nearly verified!"
+    nearlyverifieddescription: "Log into the Minecraft server to validate your verification."
+    invalidinput: "Invalid Input:"
+    invalidinputdescription: "Check your input for special characters, invalid minecraft accounts and spaces."
+    pleaseuse: "Please use `/verify MinecraftName`."
+    inputupdated: "Your input got updated!"
+    verified: "You are verified!"
+    verifieddescription: "Click the button below to get access to the server."
+    buttongetaccess: "Get Access"
+    mcnamealreadyverified: "This Minecraft Account was already verified!"
+
+whitelist:
+  uuid:
+    mcname: "MCname"
+    dcname: "DCname" # DiscordName
+    dcID: 12345 # DiscordID

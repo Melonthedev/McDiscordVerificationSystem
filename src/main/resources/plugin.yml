@@ -1,0 +1,16 @@
+name: McDiscordVerificationSystem
+version: '${project.version}'
+main: wtf.melonthedev.mcdiscordverificationsystem.Main
+api-version: 1.18
+author: Melonthedev
+description: Discord Verify System to stop random griefers and bots
+website: Melonthedev.wtf
+commands:
+  verify:
+    description: Verifies a player directly ingame
+  unverify:
+    description: Unverifies a player directly ingame
+  settoken:
+    description: Sets the token for the discord bot
+  debug:
+    description: DEBUGGING
