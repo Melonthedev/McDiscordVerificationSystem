@@ -28,7 +28,6 @@ public final class Main extends JavaPlugin {
     String guildName;
     String playing;
 
-
     @Override
     public void onEnable() {
         //init Stuff
