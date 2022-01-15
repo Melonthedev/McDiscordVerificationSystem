@@ -42,6 +42,7 @@ public class UnverifyCommand implements CommandExecutor {
         sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "[Verification] " + ChatColor.RESET + ChatColor.GREEN + Messages.getMessage("minecraft.unverifyplayersuccess") + " '" + args[0] + "'.");
         Player player = Bukkit.getPlayer(args[0]);
         if (player != null) player.kickPlayer(ChatColor.RED + "You were unverified.\nYou can verify again by following the steps you get after rejoining.");
+
         return false;
     }
 }

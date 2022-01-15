@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.Button;
 import wtf.melonthedev.mcdiscordverificationsystem.Main;
+import wtf.melonthedev.mcdiscordverificationsystem.VerifyHelper;
 
 import java.util.Objects;
 

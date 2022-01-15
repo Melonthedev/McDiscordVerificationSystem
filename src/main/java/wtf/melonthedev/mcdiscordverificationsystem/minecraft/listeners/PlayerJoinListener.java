@@ -25,10 +25,12 @@ public class PlayerJoinListener implements Listener {
             return;
         }
         if (!Main.getPlugin().isVerified(event.getPlayer().getUniqueId())) {
-            Main.getPlugin().getLogger().log(Level.INFO, event.getPlayer().getName() + "/" + Objects.requireNonNull(event.getPlayer().getAddress()).getAddress().getHostAddress() +
+            Main.getPlugin().getLogger().log(Level.INFO,
+                    event.getPlayer().getName() + "/" +
+                    event.getAddress() +
                     " tried to log in.");
             //Bukkit.broadcastMessage(ChatColor.YELLOW + event.getPlayer().getName() + " " + Messages.getMessage("minecraft.triedtojoin"));
-            event.getPlayer().kickPlayer(ChatColor.GREEN + Messages.getMessage("minecraft.notverified"));
+            event.disallow( PlayerLoginEvent.Result.KICK_OTHER, ChatColor.GREEN + Messages.getMessage("minecraft.notverified"));
             //event.getPlayer().kickPlayer(ChatColor.GREEN + "You are not verified yet." +
             //        "\nJoin our Discordserver to verify: " +
             //        "\n" + ChatColor.AQUA + "discord.mcsurvivalprojekt.de" + ChatColor.GOLD +

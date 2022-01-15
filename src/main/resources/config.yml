@@ -32,6 +32,7 @@ messages:
     verifieddescription: "Click the button below to get access to the server."
     buttongetaccess: "Get Access"
     mcnamealreadyverified: "This Minecraft Account was already verified!"
+    onlychatwhenverified: "Please only chat, if you are verified. :)"
 
 whitelist:
   uuid:

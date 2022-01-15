@@ -45,14 +45,12 @@ public class ReadyListener extends ListenerAdapter {
             if (event.getAuthor().isBot()) return;
             event.getMessage().delete().queueAfter(60, TimeUnit.SECONDS);
             VerifyHelper.selfDestruct(event.getChannel(), Messages.getMessage("discord.onlychatwhenverified")).queue();
-            return;
         }
 
         //DEBUG STUFF, WILL BE REMOVED IN FINAL VERSION
-        String message = event.getMessage().getContentRaw();
+        /*String message = event.getMessage().getContentRaw();
 
         Member member = event.getMember();
-        Guild survivalprojekt = event.getJDA().getGuilds().get(0);
         if (member == null) {
             System.out.println("MEMBERNULL");
             return;
@@ -61,7 +59,7 @@ public class ReadyListener extends ListenerAdapter {
         if (message.contains("testembed")) {
             VerifyHelper.sendWelcomeMessage(member, event.getTextChannel());
             return;
-        }
+        }/*
         if (!message.contains(":")) return;
         if (message.split(":").length <= 1) return;
         Role role = survivalprojekt.getRolesByName(message.split(":")[0], true).get(0);
@@ -73,7 +71,7 @@ public class ReadyListener extends ListenerAdapter {
             survivalprojekt.addRoleToMember(member, role).queue();
         } else if (message.contains("removerole")) {
             survivalprojekt.removeRoleFromMember(member, role).queue();
-        }
+        }*/
     }
 
 }
