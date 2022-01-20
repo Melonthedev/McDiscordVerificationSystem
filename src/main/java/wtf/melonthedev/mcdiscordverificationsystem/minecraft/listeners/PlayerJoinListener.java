@@ -1,11 +1,13 @@
 package wtf.melonthedev.mcdiscordverificationsystem.minecraft.listeners;
 
+import net.dv8tion.jda.api.entities.VoiceChannel;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import wtf.melonthedev.mcdiscordverificationsystem.Main;
 import wtf.melonthedev.mcdiscordverificationsystem.Messages;
 import wtf.melonthedev.mcdiscordverificationsystem.VerifyHelper;
@@ -35,7 +37,19 @@ public class PlayerJoinListener implements Listener {
             //        "\nJoin our Discordserver to verify: " +
             //        "\n" + ChatColor.AQUA + "discord.mcsurvivalprojekt.de" + ChatColor.GOLD +
             //        "\nIt just makes sure no bots are joining.");
+            return;
         }
+        VoiceChannel channel = Main.getPlugin().getBot().getGuild().getVoiceChannelById(Messages.getMessage("ids.onlinecountervoicechannelid"));
+        if (channel == null) return;
+        channel.getManager().setName("Online: " + (Bukkit.getOnlinePlayers().size() + 1)).queue();
+    }
+
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        VoiceChannel channel = Main.getPlugin().getBot().getGuild().getVoiceChannelById(Messages.getMessage("ids.onlinecountervoicechannelid"));
+        if (channel == null) return;
+        channel.getManager().setName("Online: " + (Bukkit.getOnlinePlayers().size() - 1)).queue();
     }
 
 }
