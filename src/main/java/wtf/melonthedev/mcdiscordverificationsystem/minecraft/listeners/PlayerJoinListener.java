@@ -39,7 +39,7 @@ public class PlayerJoinListener implements Listener {
             //        "\nIt just makes sure no bots are joining.");
             return;
         }
-        VoiceChannel channel = Main.getPlugin().getBot().getGuild().getVoiceChannelById(Messages.getMessage("ids.onlinecountervoicechannelid"));
+        VoiceChannel channel = Main.getPlugin().getBot().getGuild().getVoiceChannelById(Messages.getID("onlinecountervoicechannelid"));
         if (channel == null) return;
         channel.getManager().setName("Online: " + (Bukkit.getOnlinePlayers().size() + 1)).queue();
     }
@@ -47,7 +47,7 @@ public class PlayerJoinListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        VoiceChannel channel = Main.getPlugin().getBot().getGuild().getVoiceChannelById(Messages.getMessage("ids.onlinecountervoicechannelid"));
+        VoiceChannel channel = Main.getPlugin().getBot().getGuild().getVoiceChannelById(Messages.getID("onlinecountervoicechannelid"));
         if (channel == null) return;
         channel.getManager().setName("Online: " + (Bukkit.getOnlinePlayers().size() - 1)).queue();
     }

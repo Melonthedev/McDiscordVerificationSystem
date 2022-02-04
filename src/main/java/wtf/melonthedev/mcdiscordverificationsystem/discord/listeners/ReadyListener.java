@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.Button;
 import org.jetbrains.annotations.NotNull;
 import wtf.melonthedev.mcdiscordverificationsystem.Main;
 import wtf.melonthedev.mcdiscordverificationsystem.Messages;
@@ -35,10 +36,19 @@ public class ReadyListener extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        if (event.getMessage().getMentionedUsers().contains(event.getJDA().getSelfUser())) event.getMessage().addReaction("👀").queue();
+        if (event.getMessage().getMentionedUsers().contains(event.getJDA().getSelfUser())) {
+            if (event.getMessage().getContentRaw().contains("♥") || event.getMessage().getContentRaw().contains("❤"))
+                event.getMessage().addReaction("❤").queue();
+            else
+                event.getMessage().addReaction("👀").queue();
+        }
         if (event.isFromType(ChannelType.PRIVATE)) {
             if (event.getMessage().getAuthor().isBot()) return;
-            event.getChannel().sendMessage("👀").queue();
+            boolean dontSendEyes = Main.getPlugin().getConfig().getBoolean("discord.stopeyes." + event.getAuthor().getId());
+            if (event.getMessage().getContentRaw().equals(":eyes:") || event.getMessage().getContentRaw().equals("👀")) {
+                if (dontSendEyes) event.getChannel().sendMessage("😲").setActionRow(Button.success("starteyes", "SEND ME 👀!")).queue();
+                else event.getChannel().sendMessage("😲").setActionRow(Button.danger("stopeyes", "STOP SENDING ME 👀!")).queue();
+            } else if (!dontSendEyes) event.getChannel().sendMessage("👀").queue();
             return;
         }
         if (event.getChannel().getIdLong() == 837263808556826645L) {

@@ -15,4 +15,10 @@ public class Messages {
         return message;
     }
 
+    public static long getID(String key) {
+        ConfigurationSection ids = config.getConfigurationSection("discord.ids");
+        if (ids == null) return 0;
+        return ids.getLong(key);
+    }
+
 }

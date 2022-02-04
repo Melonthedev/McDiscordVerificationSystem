@@ -24,6 +24,18 @@ public class ButtonListener extends ListenerAdapter {
             case "idk":
                 event.editButton(Button.danger("idk", "😡🤬🤬😡😤 YOU BETTER STOP TROLLING ME!").withDisabled(true)).queue();
                 break;
+            case "stopeyes":
+                event.editButton(event.getButton().withDisabled(true)).queue();
+                event.getChannel().sendMessage("Okay ¯\\_(ツ)_/¯").queue();
+                Main.getPlugin().getConfig().set("discord.stopeyes." + event.getUser().getId(), true);
+                Main.getPlugin().saveConfig();
+                break;
+            case "starteyes":
+                event.editButton(event.getButton().withDisabled(true)).queue();
+                event.getChannel().sendMessage("👍").queue();
+                Main.getPlugin().getConfig().set("discord.stopeyes." + event.getUser().getId(), null);
+                Main.getPlugin().saveConfig();
+                break;
         }
         if (!event.getComponentId().equals("getaccess"))
             return;
