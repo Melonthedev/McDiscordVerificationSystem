@@ -1,6 +1,7 @@
 package wtf.melonthedev.mcdiscordverificationsystem;
 
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -9,7 +10,7 @@ import wtf.melonthedev.mcdiscordverificationsystem.minecraft.commands.DebugComma
 import wtf.melonthedev.mcdiscordverificationsystem.minecraft.commands.SetTokenCommand;
 import wtf.melonthedev.mcdiscordverificationsystem.minecraft.commands.UnverifyCommand;
 import wtf.melonthedev.mcdiscordverificationsystem.minecraft.commands.VerifyCommand;
-import wtf.melonthedev.mcdiscordverificationsystem.minecraft.listeners.PlayerJoinListener;
+import wtf.melonthedev.mcdiscordverificationsystem.minecraft.listeners.PlayerJoinQuitListener;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -49,7 +50,7 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("unverify")).setExecutor(new UnverifyCommand());
         Objects.requireNonNull(this.getCommand("settoken")).setExecutor(new SetTokenCommand());
         Objects.requireNonNull(this.getCommand("debug")).setExecutor(new DebugCommand());
-        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinQuitListener(), this);
     }
 
     @Override
@@ -72,6 +73,13 @@ public final class Main extends JavaPlugin {
         config.set("whitelist." + minecraftUUID + ".dcname", discordName);
         config.set("whitelist." + minecraftUUID + ".dcID", discordID);
         saveConfig();
+    }
+
+    public Member getMemberFromMinecraft(UUID uuid) {
+        if (!config.contains("whitelist." + uuid + ".dcID")) return null;
+        long discordID = config.getLong("whitelist." + uuid + ".dcID");
+        if (discordID == 0) return null;
+        return getBot().getGuild().getMemberById(discordID);
     }
 
     public boolean isVerified(UUID uuid) {

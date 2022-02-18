@@ -1,5 +1,7 @@
 package wtf.melonthedev.mcdiscordverificationsystem.minecraft.listeners;
 
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -15,7 +17,7 @@ import wtf.melonthedev.mcdiscordverificationsystem.VerifyHelper;
 import java.util.Objects;
 import java.util.logging.Level;
 
-public class PlayerJoinListener implements Listener {
+public class PlayerJoinQuitListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerLoginEvent event) {
@@ -42,6 +44,13 @@ public class PlayerJoinListener implements Listener {
         VoiceChannel channel = Main.getPlugin().getBot().getGuild().getVoiceChannelById(Messages.getID("onlinecountervoicechannelid"));
         if (channel == null) return;
         channel.getManager().setName("Online: " + (Bukkit.getOnlinePlayers().size() + 1)).queue();
+
+
+        Role ingameRole = Main.getPlugin().getBot().getGuild().getRoleById(944217967003070484L);
+        if (ingameRole == null) return;
+        Member member = Main.getPlugin().getMemberFromMinecraft(event.getPlayer().getUniqueId());
+        if (member == null) return;
+        Main.getPlugin().getBot().getGuild().addRoleToMember(member, ingameRole).queue();
     }
 
 
@@ -50,6 +59,12 @@ public class PlayerJoinListener implements Listener {
         VoiceChannel channel = Main.getPlugin().getBot().getGuild().getVoiceChannelById(Messages.getID("onlinecountervoicechannelid"));
         if (channel == null) return;
         channel.getManager().setName("Online: " + (Bukkit.getOnlinePlayers().size() - 1)).queue();
+
+        Role ingameRole = Main.getPlugin().getBot().getGuild().getRoleById(944217967003070484L);
+        if (ingameRole == null) return;
+        Member member = Main.getPlugin().getMemberFromMinecraft(event.getPlayer().getUniqueId());
+        if (member == null) return;
+        Main.getPlugin().getBot().getGuild().removeRoleFromMember(member, ingameRole).queue();
     }
 
 }
